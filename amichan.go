@@ -59,6 +59,8 @@ func (ac *Amichan) Connect() {
 type Event interface {
 	// Field returns event field value by name
 	Field(name string) (val string, ok bool)
+	// Fields returns all field names in event
+	Fields() []string
 	// Name returns event name
 	Name() string
 	// Time returns event time
@@ -70,6 +72,15 @@ type event map[string]string
 func (e event) Field(name string) (string, bool) {
 	val, ok := e[name]
 	return val, ok
+}
+
+func (e event) Fields() []string {
+	fields := make([]string, len(e))
+	var idx int
+	for k := range e {
+		fields[idx] = k
+	}
+	return fields
 }
 
 func (e event) Name() string {
