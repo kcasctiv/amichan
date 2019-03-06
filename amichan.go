@@ -76,10 +76,13 @@ func (e event) Field(name string) (string, bool) {
 
 func (e event) Fields() []string {
 	fields := make([]string, len(e))
+
 	var idx int
 	for k := range e {
 		fields[idx] = k
+		idx++
 	}
+
 	return fields
 }
 
